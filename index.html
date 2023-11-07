@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>لعبة crash - كود التنبؤ</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+  
+    <div class="container text-center">
+      <h1 class="mt-5">لعبة crash - كود التنبؤ</h1>
+  
+      <div class="alert alert-info text-center">
+        <div class="prediction d-inline-block"></div>
+        <span class="d-inline-block mx-2"> : التنبؤ</span>
+      </div>
+      <div class="alert alert-info text-center">
+        
+        <div class="prediction-percentage d-inline-block">0</div>
+        <span class="d-inline-block mx-2">: معدل التنبؤ</span>
+        
+      </div>
+      
+      <button class="btn btn-primary">تنبؤ جديد</button>
+    </div>
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- Add any additional scripts if needed -->
+  
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Function to calculate the prediction percentage
+        function calculatePredictionPercentage(predictions, result) {
+          var count = 0;
+          for (var i = 0; i < predictions.length; i++) {
+            if (predictions[i] === result) {
+              count++;
+            }
+          }
+          return (count / predictions.length) * 100;
+        }
+    
+        // Function to display the prediction
+        function showPrediction(prediction) {
+          document.querySelector(".prediction").innerHTML = prediction;
+        }
+    
+        // Function to display the prediction percentage
+        function showPredictionPercentage(predictionPercentage) {
+          var roundedPercentage = Math.round(predictionPercentage * 100) / 100;
+          document.querySelector(".prediction-percentage").innerHTML = roundedPercentage + "x";
+        }
+    
+        // Function to track the prediction and result
+        function trackPrediction(prediction, result) {
+          // Store the prediction and result
+          predictions.push(prediction);
+    
+          // Calculate the prediction percentage
+          predictionPercentage = calculatePredictionPercentage(predictions, result);
+    
+          // Display the prediction and percentage
+          showPrediction(prediction);
+          showPredictionPercentage(predictionPercentage);
+        }
+    
+        // Initialize predictions array
+        var predictions = [];
+    
+        // Display the first prediction
+        showPrediction(1);
+    
+        // Listen for click event on the button
+        document.querySelector(".btn").addEventListener("click", function() {
+          // Generate a new prediction
+          var prediction = Math.floor(Math.random() * 100);
+    
+          // Track the prediction and result
+          trackPrediction(prediction, prediction);
+        });
+      });
+    </script>
+  <!-- <div class="prediction">التنبؤ</div>
+  <div class="prediction-rate">معدل التنبؤ</div>
+  <button class="btn">تنبؤ جديد</button> -->
+</body>
+</html>
